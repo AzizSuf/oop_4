@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace StressTest
+﻿namespace StressTest
 {
     /// <summary>
     /// Enumeration of girder material types
@@ -46,6 +40,7 @@ namespace StressTest
         /// Test result (enumeration type)
         /// </summary>
         public TestResult Result;
+
         /// <summary>
         /// Description of reason for failure
         /// </summary>

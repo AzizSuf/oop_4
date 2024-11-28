@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Ex1
+﻿namespace Ex1
 {
     public struct Complex
     {
@@ -14,8 +7,8 @@ namespace Ex1
 
         public Complex()
         {
-            Re = 0;
-            Im = 0;
+            Re = 0.0;
+            Im = 0.0;
         }
 
         public Complex(double re, double im)
@@ -24,14 +17,9 @@ namespace Ex1
             Im = im;
         }
 
-        public double Mod()
+        public double Module()
         {
             return Math.Sqrt(Re * Re + Im * Im);
-        }
-
-        public override string ToString()
-        {
-            return $"{Re} + {Im}i";
         }
 
         public static implicit operator Complex((double re, double im) num)
@@ -56,12 +44,36 @@ namespace Ex1
 
         public static bool operator ==(Complex a, Complex b)
         {
-            return (a.Re == b.Re) && (a.Im == b.Im);
+            return (a.Re == b.Re) &&
+                   (a.Im == b.Im);
         }
 
         public static bool operator !=(Complex a, Complex b)
         {
-            return (a.Re != b.Re) || (a.Im != b.Im);
+            return !(a == b);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (obj is Complex other)
+            {
+                return this == other;
+            }
+            return false;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(Re, Im);
+        }
+
+        public override string ToString()
+        {
+            // {number: +0; -0; 0}
+            // +0: Displays a + for positive numbers.
+            // -0: Displays a - for negative numbers.
+            //  0: If the number is zero, it simply shows 0.
+            return $"{Re}{Im:+0;-0;0}i";
         }
     }
 }
